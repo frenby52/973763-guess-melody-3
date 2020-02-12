@@ -6,23 +6,23 @@ import ArtistQuestionScreen from "../artist-question-screen/artist-question-scre
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
 
 
-const welcomeButtonClickHandler = () => {};
+const handleWelcomeButtonClick = () => {};
 
 const App = (props) => {
-  const {errorCount} = props;
+  const {errorCount, questions} = props;
 
   return (
   //  <WelcomeScreen errorCount={errorCount} onWelcomeButtonClick={welcomeButtonClickHandler}/>
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <WelcomeScreen errorCount={errorCount} onWelcomeButtonClick={welcomeButtonClickHandler}/>
+          <WelcomeScreen errorCount={errorCount} onWelcomeButtonClick={handleWelcomeButtonClick}/>
         </Route>
         <Route exact path="/dev-artist">
-          <ArtistQuestionScreen />
+          <ArtistQuestionScreen question={questions[1]}/>
         </Route>
         <Route exact path="/dev-genre">
-          <GenreQuestionScreen />
+          <GenreQuestionScreen question={questions[0]} />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -31,7 +31,8 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  errorCount: PropTypes.number.isRequired
+  errorCount: PropTypes.number.isRequired,
+  questions: PropTypes.array.isRequired
 };
 
 export default App;

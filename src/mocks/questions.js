@@ -1,8 +1,4 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import App from "./app.jsx";
-
-const ERRORS_COUNT = 3;
+const AVATAR_URL = `https://api.adorable.io/avatars/128`;
 
 const questions = [
   {
@@ -35,23 +31,19 @@ const questions = [
     },
     answers: [
       {
-        picture: `https://api.adorable.io/avatars/128/0`,
-        artist: `artist`,
-      }, {
-        picture: `https://api.adorable.io/avatars/128/1`,
-        artist: `artist1`,
-      }, {
-        picture: `https://api.adorable.io/avatars/128/2`,
+        picture: `${AVATAR_URL}/${Math.random()}`,
+        artist: `artist`
+      },
+      {
+        picture: `${AVATAR_URL}/${Math.random()}`,
+        artist: `artist1`
+      },
+      {
+        picture: `${AVATAR_URL}/${Math.random()}`,
         artist: `artist2`
       }
     ]
   }
 ];
 
-it(`App render`, () => {
-  const tree = renderer
-    .create(<App errorCount={ERRORS_COUNT} questions={questions}/>)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
+export default questions;

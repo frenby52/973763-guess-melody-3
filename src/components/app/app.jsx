@@ -17,26 +17,6 @@ export default class App extends React.PureComponent {
     };
   }
 
-  render() {
-    const {questions} = this.props;
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderGameScreen()}
-
-          </Route>
-          <Route exact path="/dev-artist">
-            <ArtistQuestionScreen question={questions[1]} onAnswer={() => {}}/>
-          </Route>
-          <Route exact path="/dev-genre">
-            <GenreQuestionScreen question={questions[0]} onAnswer={() => {}}/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-
   _renderGameScreen() {
     const {errorCount, questions} = this.props;
     const {step} = this.state;
@@ -86,11 +66,31 @@ export default class App extends React.PureComponent {
       step: 0
     });
   }
+
+  render() {
+    const {questions} = this.props;
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderGameScreen()}
+
+          </Route>
+          <Route exact path="/dev-artist">
+            <ArtistQuestionScreen question={questions[1]} onAnswer={() => {}}/>
+          </Route>
+          <Route exact path="/dev-genre">
+            <GenreQuestionScreen question={questions[0]} onAnswer={() => {}}/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 App.propTypes = {
   errorCount: PropTypes.number.isRequired,
-  questions: PropTypes.array.isRequired
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 

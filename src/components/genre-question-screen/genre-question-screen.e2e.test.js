@@ -30,7 +30,7 @@ const mock = {
   },
 };
 
-it(`When user answers genre question form is not sent`, () => {
+it(`User answers genre question form is preventing to be sent by default`, () => {
   const {question} = mock;
   const onAnswer = jest.fn();
   const genreQuestion = shallow(<GenreQuestionScreen

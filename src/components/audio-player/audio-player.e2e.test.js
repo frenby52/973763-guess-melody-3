@@ -25,6 +25,7 @@ const getPlayer = (isPlaying) => {
 describe(`AudioPlayer has pause and play state`, () => {
   it(`AudioPlayer state is true when playing`, () => {
     const player = getPlayer(false);
+
     const button = player.find(`.track__button`);
 
     player.setState({isLoading: false});

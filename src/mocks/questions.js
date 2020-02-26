@@ -31,15 +31,15 @@ const questions = [
     },
     answers: [
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/0`,
         artist: `artist`
       },
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/1`,
         artist: `artist1`
       },
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/2`,
         artist: `artist2`
       }
     ]

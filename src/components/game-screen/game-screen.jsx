@@ -6,7 +6,11 @@ import Mistakes from "../mistakes/mistakes.jsx";
 
 
 const GameScreen = (props) => {
-  const {type, children, mistakes} = props;
+  const {
+    type,
+    children,
+    mistakes,
+  } = props;
 
   return (
     <section className={`game game--${type}`}>
@@ -17,16 +21,20 @@ const GameScreen = (props) => {
         </a>
 
         <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-          <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
+          <circle className="timer__line" cx="390" cy="390" r="370"
+            style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
 
-        <Mistakes count={mistakes}/>
+        <Mistakes
+          count={mistakes}
+        />
       </header>
 
       {children}
     </section>
   );
 };
+
 
 GameScreen.propTypes = {
   type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
@@ -36,6 +44,7 @@ GameScreen.propTypes = {
   ]).isRequired,
   mistakes: PropTypes.number.isRequired,
 };
+
 
 const mapStateToProps = (state) => ({
   mistakes: state.mistakes,

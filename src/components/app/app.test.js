@@ -6,50 +6,40 @@ import {App} from "./app.jsx";
 
 const mockStore = configureStore([]);
 
-const ERRORS_COUNT = 3;
-
 const questions = [
   {
     type: `genre`,
     genre: `rock`,
-    answers: [
-      {
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-        genre: `rock`
-      },
-      {
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-        genre: `pop`
-      },
-      {
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-        genre: `rock`
-      },
-      {
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-        genre: `pop`
-      }
-    ]
-  },
-  {
+    answers: [{
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      genre: `rock`,
+    }, {
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      genre: `blues`,
+    }, {
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      genre: `jazz`,
+    }, {
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      genre: `rock`,
+    }],
+  }, {
     type: `artist`,
     song: {
-      artist: `artist`,
+      artist: `Jim Beam`,
       src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
-    answers: [
-      {
-        picture: `https://api.adorable.io/avatars/128/0`,
-        artist: `artist`,
-      }, {
-        picture: `https://api.adorable.io/avatars/128/1`,
-        artist: `artist1`,
-      }, {
-        picture: `https://api.adorable.io/avatars/128/2`,
-        artist: `artist2`
-      }
-    ]
-  }
+    answers: [{
+      picture: `https://api.adorable.io/avatars/128/1`,
+      artist: `John Snow`,
+    }, {
+      picture: `https://api.adorable.io/avatars/128/2`,
+      artist: `Jack Daniels`,
+    }, {
+      picture: `https://api.adorable.io/avatars/128/3`,
+      artist: `Jim Beam`,
+    }],
+  },
 ];
 
 describe(`Render App`, () => {
@@ -62,10 +52,12 @@ describe(`Render App`, () => {
       .create(
           <Provider store={store}>
             <App
-              maxMistakes={ERRORS_COUNT}
+              maxMistakes={3}
+              mistakes={0}
               questions={questions}
               onUserAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
+              resetGame={() => {}}
               step={-1}
             />
           </Provider>
@@ -84,10 +76,12 @@ describe(`Render App`, () => {
       .create(
           <Provider store={store}>
             <App
-              maxMistakes={ERRORS_COUNT}
+              maxMistakes={3}
+              mistakes={0}
               questions={questions}
               onUserAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
+              resetGame={() => {}}
               step={0}
             />
           </Provider>, {
@@ -109,11 +103,67 @@ describe(`Render App`, () => {
       .create(
           <Provider store={store}>
             <App
-              maxMistakes={ERRORS_COUNT}
+              maxMistakes={3}
+              mistakes={0}
               questions={questions}
               onUserAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
+              resetGame={() => {}}
               step={1}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          })
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render GameOverScreen`, () => {
+    const store = mockStore({
+      mistakes: 3,
+    });
+
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <App
+              maxMistakes={3}
+              mistakes={3}
+              questions={questions}
+              onUserAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              resetGame={() => {}}
+              step={1}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          })
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render WinScreen`, () => {
+    const store = mockStore({
+      mistakes: 3,
+    });
+
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <App
+              maxMistakes={3}
+              mistakes={0}
+              questions={questions}
+              onUserAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              resetGame={() => {}}
+              step={3}
             />
           </Provider>, {
             createNodeMock: () => {

@@ -10,20 +10,20 @@ const mock = {
   question: {
     type: `artist`,
     song: {
-      artist: `artist`,
+      artist: ``,
       src: ``
     },
     answers: [
       {
-        artist: `artist`,
+        artist: `one`,
         picture: `pic-one`,
       },
       {
-        artist: `artist1`,
+        artist: `two`,
         picture: `pic-two`,
       },
       {
-        artist: `artist2`,
+        artist: `three`,
         picture: `pic-three`,
       },
     ],
@@ -40,7 +40,7 @@ it(`Click on user answer should pass to the callback data-object from which this
   const {question} = mock;
   const onAnswer = jest.fn();
   const userAnswer = {
-    artist: `artist`,
+    artist: `one`,
     picture: `pic-one`,
   };
 

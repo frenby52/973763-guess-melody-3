@@ -3,14 +3,16 @@ import renderer from "react-test-renderer";
 import {GameScreen} from "./game-screen.jsx";
 import {GameType} from "../../const.js";
 
-const ERRORS_COUNT = 3;
 
 const children = <div className="children-component" />;
 
 describe(`GameScreen component render correctly`, () => {
   it(`with type GameType.ARTIST`, () => {
     const tree = renderer.create(
-        <GameScreen type={GameType.ARTIST} mistakes={ERRORS_COUNT}>
+        <GameScreen
+          type={GameType.ARTIST}
+          mistakes={3}
+        >
           {children}
         </GameScreen>
     ).toJSON();
@@ -20,7 +22,10 @@ describe(`GameScreen component render correctly`, () => {
 
   it(`with type GameType.GENRE`, () => {
     const tree = renderer.create(
-        <GameScreen type={GameType.GENRE} mistakes={ERRORS_COUNT}>
+        <GameScreen
+          type={GameType.GENRE}
+          mistakes={3}
+        >
           {children}
         </GameScreen>
     ).toJSON();
